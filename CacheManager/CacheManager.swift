@@ -10,7 +10,11 @@ import Foundation
 import RealmSwift
 
 public class CacheManager {
-    public var items = [Object]()
+    public var items = [Object]() {
+        didSet {
+            setUpdateNotification()
+        }
+    }
     public var realm = RealmProvider.realm()
     public var itemsCount: Int {
         return items.count
@@ -22,6 +26,9 @@ public class CacheManager {
     public func itemsFromCache() {
         // swiftlint:disable force_try
         // items = Array(try! realm.objects(Object))
+    }
+    public func setUpdateNotification() {
+        
     }
     public func itemAt(index: Int) -> Object? {
         if 0..<itemsCount ~= index {

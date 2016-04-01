@@ -157,6 +157,14 @@ class ManagerTests: QuickSpec {
                     expect(sut.itemsCount).to(equal(1))
                 }
             }
+            context("notification") {
+                it("on items update") {
+                    sut.updated = false
+                    expect(sut.updated).to(beFalse())
+                    sut.itemAdd(dummy)
+                    expect(sut.updated).to(beTrue())
+                }
+            }
         }
     }
 }
@@ -166,6 +174,9 @@ class DummyObject: Object {
 }
 
 class DummyManager: CacheManager {
+    
+    var updated = false
+    
     required init() {
         super.init()
         super.items = [DummyObject]()
@@ -174,6 +185,10 @@ class DummyManager: CacheManager {
     override func itemsFromCache() {
         // swiftlint:disable force_try
         super.items = Array(try! realm.objects(DummyObject))
+    }
+    
+    override func setUpdateNotification() {
+        updated = true
     }
     
 }
