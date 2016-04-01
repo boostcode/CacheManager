@@ -12,7 +12,6 @@
 		4819D7A71CAEB7EF00271DD3 /* CacheManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4819D79C1CAEB7EE00271DD3 /* CacheManager.framework */; };
 		4819D7AC1CAEB7EF00271DD3 /* CacheManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819D7AB1CAEB7EF00271DD3 /* CacheManagerTests.swift */; };
 		4819D7B71CAEB93200271DD3 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819D7B61CAEB93200271DD3 /* CacheManager.swift */; };
-		4819D7B91CAEB93A00271DD3 /* RealmProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4819D7B81CAEB93A00271DD3 /* RealmProvider.swift */; };
 		DB7265C77D38C595314DC500 /* Pods_CacheManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 796DF54C86C487693A4420D5 /* Pods_CacheManager.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +37,6 @@
 		4819D7AB1CAEB7EF00271DD3 /* CacheManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManagerTests.swift; sourceTree = "<group>"; };
 		4819D7AD1CAEB7EF00271DD3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4819D7B61CAEB93200271DD3 /* CacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
-		4819D7B81CAEB93A00271DD3 /* RealmProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmProvider.swift; sourceTree = "<group>"; };
 		796DF54C86C487693A4420D5 /* Pods_CacheManager.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CacheManager.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA53236A0449A9448D28B70B /* Pods-CacheManagerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CacheManagerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CacheManagerTests/Pods-CacheManagerTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,7 +95,6 @@
 			isa = PBXGroup;
 			children = (
 				4819D79F1CAEB7EE00271DD3 /* CacheManager.h */,
-				4819D7B81CAEB93A00271DD3 /* RealmProvider.swift */,
 				4819D7B61CAEB93200271DD3 /* CacheManager.swift */,
 				4819D7A11CAEB7EE00271DD3 /* Info.plist */,
 			);
@@ -315,7 +312,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4819D7B91CAEB93A00271DD3 /* RealmProvider.swift in Sources */,
 				4819D7B71CAEB93200271DD3 /* CacheManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

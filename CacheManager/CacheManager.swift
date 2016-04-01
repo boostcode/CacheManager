@@ -57,3 +57,24 @@ class CacheManager {
         }
     }
 }
+
+class RealmProvider {
+    class func realm() -> Realm {
+        if let _ = NSClassFromString("XCTest") {
+            // swiftlint:disable force_try
+            return try! Realm(
+                configuration: Realm.Configuration(
+                    path: nil,
+                    inMemoryIdentifier: "test",
+                    encryptionKey: nil,
+                    readOnly: false,
+                    schemaVersion: 0,
+                    migrationBlock: nil,
+                    objectTypes: nil
+                ))
+        } else {
+            // swiftlint:disable force_try
+            return try! Realm()
+        }
+    }
+}
