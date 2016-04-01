@@ -84,7 +84,7 @@ class ManagerTests: QuickSpec {
                     expect(success).to(beTrue())
                 }
                 it("doesn't update item out of range") {
-                    
+                    expect(false).to(beTrue())
                 }
                 it("removes item") {
                     expect(sut.items.count).to(equal(0))

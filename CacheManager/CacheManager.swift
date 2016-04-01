@@ -40,6 +40,10 @@ public class CacheManager {
         }
     }
     public func itemUpdateAt(index: Int, item: Object) -> Bool {
+        if 0..<itemsCount ~= index {
+            items[index] = item
+            return true
+        }
         return false
     }
     public func itemRemoveAt(index: Int) -> Bool {
