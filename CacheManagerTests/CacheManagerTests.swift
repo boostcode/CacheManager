@@ -52,29 +52,35 @@ class ManagerTests: QuickSpec {
                 it("exists") {
                     expect(sut.items).toNot(beNil())
                 }
-                it("can get item at index") {
+                it("gets item at index") {
                     sut.itemAdd(dummy)
                     let check = sut.itemAt(0)
                     expect(sut.itemAt(0)).to(equal(check))
                 }
-                it("can't get item out of range") {
+                it("doesn't get item out of range") {
                     sut.itemAdd(dummy)
                     expect(sut.itemAt(7)).to(beNil())
                 }
-                it("can add item") {
+                it("adds item") {
                     expect(sut.items.count).to(equal(0))
                     sut.itemAdd(dummy)
                     expect(sut.items.count).to(equal(1))
                     expect(sut.itemAt(0)).to(equal(dummy))
                 }
-                it("can't add the same item more than once") {
+                it("doesn't add the same item more than once") {
                     expect(sut.items.count).to(equal(0))
                     sut.itemAdd(dummy)
                     expect(sut.items.count).to(equal(1))
                     sut.itemAdd(dummy)
                     expect(sut.items.count).to(equal(1))
                 }
-                it("can remove item") {
+                it("updates item at position") {
+                    
+                }
+                it("doesn't update item out of range") {
+                    
+                }
+                it("removes item") {
                     expect(sut.items.count).to(equal(0))
                     sut.itemAdd(dummy)
                     expect(sut.items.count).to(equal(1))
@@ -85,7 +91,7 @@ class ManagerTests: QuickSpec {
                     sut.itemRemoveAt(0)
                     expect(sut.items.count).to(equal(0))
                 }
-                it("can remove all items") {
+                it("removes all items") {
                     expect(sut.items.count).to(equal(0))
                     sut.itemAdd(dummy)
                     sut.itemAdd(dummy2)
@@ -93,7 +99,7 @@ class ManagerTests: QuickSpec {
                     sut.itemRemoveAll()
                     expect(sut.items.count).to(equal(0))
                 }
-                it("can't remove out of range") {
+                it("doesn't remove out of range") {
                     expect(sut.items.count).to(equal(0))
                     sut.itemAdd(dummy)
                 }
@@ -102,10 +108,13 @@ class ManagerTests: QuickSpec {
                 it("exists") {
                     expect(sut.realm).toNot(beNil())
                 }
-                it("add added") {
+                it("adds added") {
                     expect(sut.realm.objects(DummyObject).count).to(equal(0))
                     sut.itemAdd(dummy)
                     expect(sut.realm.objects(DummyObject).count).to(equal(1))
+                }
+                it("updates item"){
+                    
                 }
                 it("removes delete") {
                     expect(sut.realm.objects(DummyObject).count).to(equal(0))
@@ -114,7 +123,7 @@ class ManagerTests: QuickSpec {
                     sut.itemRemoveAll()
                     expect(sut.realm.objects(DummyObject).count).to(equal(0))
                 }
-                it("handle cache") {
+                it("handles cache") {
                     expect(sut.realm.objects(DummyObject).count).to(equal(0))
                     sut.itemAdd(dummy)
                     expect(sut.realm.objects(DummyObject).count).to(equal(1))
