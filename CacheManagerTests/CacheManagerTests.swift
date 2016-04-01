@@ -140,12 +140,12 @@ class DummyObject: Object {
 class DummyManager: CacheManager {
     required init() {
         super.init()
-        items = [DummyObject]()
+        super.items = [DummyObject]()
     }
     
     override func itemsFromCache() {
         // swiftlint:disable force_try
-        items = Array(try! realm.objects(DummyObject))
+        super.items = Array(try! realm.objects(DummyObject))
     }
     
 }
