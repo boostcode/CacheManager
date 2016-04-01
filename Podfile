@@ -2,12 +2,11 @@ platform :ios, '9.0'
 use_frameworks!
 
 target 'CacheManager' do
-pod 'RealmSwift'
+    pod 'RealmSwift'
 end
 
 target 'CacheManagerTests' do
-pod 'Quick'
-pod 'Nimble'
-pod 'RealmSwift'
+    pod 'Quick'
+    pod 'Nimble'
+    pod 'RealmSwift'
 end
-
