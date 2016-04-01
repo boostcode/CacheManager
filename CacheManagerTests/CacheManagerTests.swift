@@ -75,7 +75,13 @@ class ManagerTests: QuickSpec {
                     expect(sut.items.count).to(equal(1))
                 }
                 it("updates item at position") {
-                    
+                    sut.itemAdd(dummy)
+                    expect(sut.items.count).to(equal(1))
+                    expect(sut.itemAt(0)).to(equal(dummy))
+                    let success = sut.itemUpdateAt(0, item: dummy2)
+                    expect(sut.items.count).to(equal(1))
+                    expect(sut.itemAt(0)).to(equal(dummy2))
+                    expect(success).to(beTrue())
                 }
                 it("doesn't update item out of range") {
                     
@@ -102,6 +108,10 @@ class ManagerTests: QuickSpec {
                 it("doesn't remove out of range") {
                     expect(sut.items.count).to(equal(0))
                     sut.itemAdd(dummy)
+                    expect(sut.items.count).to(equal(1))
+                    let success = sut.itemRemoveAt(5)
+                    expect(sut.items.count).to(equal(1))
+                    expect(success).to(beFalse())
                 }
             }
             context("realm cache") {

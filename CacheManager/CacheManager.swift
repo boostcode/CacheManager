@@ -39,7 +39,10 @@ public class CacheManager {
             }
         }
     }
-    public func itemRemoveAt(index: Int) {
+    public func itemUpdateAt(index: Int, item: Object) -> Bool {
+        return false
+    }
+    public func itemRemoveAt(index: Int) -> Bool {
         if 0..<itemsCount ~= index {
             let item = items[index]
             items.removeAtIndex(index)
@@ -47,7 +50,9 @@ public class CacheManager {
             try! realm.write {
                 realm.delete(item)
             }
+            return true
         }
+        return false
     }
     public func itemRemoveAll() {
         items.removeAll()
