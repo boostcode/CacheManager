@@ -6,10 +6,10 @@
 //  Copyright © 2016 boostco.de. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import RealmSwift
 
-class CacheManager {
+public class CacheManager {
     var items = [Object]()
     var realm = RealmProvider.realm()
     var itemsCount: Int {

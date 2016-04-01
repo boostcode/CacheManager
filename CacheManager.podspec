@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
    s.author = { "Matteo Crippa" => "matteo@boostco.de" }
    s.homepage = "http://boostco.de"
    s.source = { :git => "https://gitlab.com/matteocrippa/cachemanager-lib-ios.git", :tag => "0.0.1"}
-   s.framework = "UIKit"
+   s.framework = 'Foundation'
    s.dependency 'RealmSwift'
    s.dependency 'Quick'
    s.dependency 'Nimble'
