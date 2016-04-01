@@ -11,7 +11,5 @@ Pod::Spec.new do |s|
    s.source = { :git => "https://gitlab.com/matteocrippa/cachemanager-lib-ios.git", :tag => "0.0.1"}
    s.framework = 'Foundation'
    s.dependency 'RealmSwift'
-   #s.dependency 'Quick'
-   #s.dependency 'Nimble'
    s.source_files = "CacheManager/*.{swift}"
 end
