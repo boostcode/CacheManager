@@ -10,27 +10,27 @@ import Foundation
 import RealmSwift
 
 public class CacheManager {
-    var items = [Object]()
+    public var items = [Object]()
     var realm = RealmProvider.realm()
-    var itemsCount: Int {
+    public var itemsCount: Int {
         return items.count
     }
 
     init() {
         itemsFromCache()
     }
-    func itemsFromCache() {
+    public func itemsFromCache() {
         // swiftlint:disable force_try
         // items = Array(try! realm.objects(Object))
     }
-    func itemAt(index: Int) -> Object? {
+    public func itemAt(index: Int) -> Object? {
         if 0..<itemsCount ~= index {
             return items[index]
         } else {
             return nil
         }
     }
-    func itemAdd(item: Object) {
+    public func itemAdd(item: Object) {
         if items.contains(item) == false {
             items.append(item)
             // swiftlint:disable force_try
@@ -39,7 +39,7 @@ public class CacheManager {
             }
         }
     }
-    func itemRemoveAt(index: Int) {
+    public func itemRemoveAt(index: Int) {
         if 0..<itemsCount ~= index {
             let item = items[index]
             items.removeAtIndex(index)
@@ -49,7 +49,7 @@ public class CacheManager {
             }
         }
     }
-    func itemRemoveAll() {
+    public func itemRemoveAll() {
         items.removeAll()
         // swiftlint:disable force_try
         try! realm.write {
