@@ -41,7 +41,12 @@ public class CacheManager {
     }
     public func itemUpdateAt(index: Int, item: Object) -> Bool {
         if 0..<itemsCount ~= index {
+            let old = items[index]
             items[index] = item
+            try! realm.write {
+                realm.delete(old)
+                realm.add(item)
+            }
             return true
         }
         return false

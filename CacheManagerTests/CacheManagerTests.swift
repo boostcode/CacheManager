@@ -126,9 +126,14 @@ class ManagerTests: QuickSpec {
                     expect(sut.realm.objects(DummyObject).count).to(equal(0))
                     sut.itemAdd(dummy)
                     expect(sut.realm.objects(DummyObject).count).to(equal(1))
+                    expect(sut.realm.objects(DummyObject)[0]).to(equal(dummy))
                 }
                 it("updates item"){
-                    
+                    expect(sut.realm.objects(DummyObject).count).to(equal(0))
+                    sut.itemAdd(dummy)
+                    expect(sut.realm.objects(DummyObject).count).to(equal(1))
+                    sut.itemUpdateAt(0, item: dummy2)
+                    expect(sut.realm.objects(DummyObject)[0]).to(equal(dummy2))
                 }
                 it("removes delete") {
                     expect(sut.realm.objects(DummyObject).count).to(equal(0))
