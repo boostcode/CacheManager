@@ -180,15 +180,14 @@ class DummyManager: CacheManager {
     required init() {
         super.init()
         super.items = [DummyObject]()
+        super.itemsUpdated = {
+            self.updated = true
+        }
     }
     
     override func itemsFromCache() {
         // swiftlint:disable force_try
         super.items = Array(try! realm.objects(DummyObject))
     }
-    
-    override func setUpdateNotification() {
-        updated = true
-    }
-    
+
 }
