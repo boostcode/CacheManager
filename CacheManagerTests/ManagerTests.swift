@@ -10,7 +10,7 @@ import Nimble
 import Quick
 import RealmSwift
 
-@testable import AwesomeSwift
+@testable import CacheManager
 
 class ManagerTests: QuickSpec {
     override func spec() {
@@ -114,7 +114,7 @@ class ManagerTests: QuickSpec {
                     sut.itemRemoveAll()
                     expect(sut.realm.objects(DummyObject).count).to(equal(0))
                 }
-                it("") {
+                it("handle cache") {
                     expect(sut.realm.objects(DummyObject).count).to(equal(0))
                     sut.itemAdd(dummy)
                     expect(sut.realm.objects(DummyObject).count).to(equal(1))
@@ -137,7 +137,7 @@ class DummyObject: Object {
     dynamic var name: String = ""
 }
 
-class DummyManager: Manager {
+class DummyManager: CacheManager {
     override init() {
         super.init()
         items = [DummyObject]()
