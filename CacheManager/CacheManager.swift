@@ -16,7 +16,7 @@ public class CacheManager {
         return items.count
     }
 
-    init() {
+    required public init() {
         itemsFromCache()
     }
     public func itemsFromCache() {

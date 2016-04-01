@@ -138,7 +138,7 @@ class DummyObject: Object {
 }
 
 class DummyManager: CacheManager {
-    override init() {
+    required init() {
         super.init()
         items = [DummyObject]()
     }
