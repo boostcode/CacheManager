@@ -67,7 +67,7 @@ class ManagerTests: QuickSpec {
                     expect(sut.items.count).to(equal(1))
                     expect(sut.itemAt(0)).to(equal(dummy))
                 }
-                it("can't add item more than once") {
+                it("can't add the same item more than once") {
                     expect(sut.items.count).to(equal(0))
                     sut.itemAdd(dummy)
                     expect(sut.items.count).to(equal(1))
