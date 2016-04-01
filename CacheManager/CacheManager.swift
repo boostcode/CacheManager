@@ -11,7 +11,7 @@ import RealmSwift
 
 public class CacheManager {
     public var items = [Object]()
-    var realm = RealmProvider.realm()
+    public var realm = RealmProvider.realm()
     public var itemsCount: Int {
         return items.count
     }
