@@ -84,7 +84,11 @@ class ManagerTests: QuickSpec {
                     expect(success).to(beTrue())
                 }
                 it("doesn't update item out of range") {
-                    expect(false).to(beTrue())
+                    sut.itemAdd(dummy)
+                    expect(sut.items.count).to(equal(1))
+                    expect(sut.itemAt(0)).to(equal(dummy))
+                    let success = sut.itemUpdateAt(5, item: dummy2)
+                    expect(success).to(beFalse())
                 }
                 it("removes item") {
                     expect(sut.items.count).to(equal(0))
