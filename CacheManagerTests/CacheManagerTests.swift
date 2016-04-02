@@ -67,6 +67,13 @@ class ManagerTests: QuickSpec {
                     expect(sut.items.count).to(equal(1))
                     expect(sut.itemAt(0)).to(equal(dummy))
                 }
+                it("adds items from array") {
+                    expect(sut.items.count).to(equal(0))
+                    sut.itemAddFromArray([dummy, dummy2])
+                    expect(sut.items.count).to(equal(2))
+                    expect(sut.itemAt(0)).to(equal(dummy))
+                    expect(sut.itemAt(1)).to(equal(dummy2))
+                }
                 it("doesn't add the same item more than once") {
                     expect(sut.items.count).to(equal(0))
                     sut.itemAdd(dummy)

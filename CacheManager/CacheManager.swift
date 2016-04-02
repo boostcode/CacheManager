@@ -46,6 +46,11 @@ public class CacheManager {
             }
         }
     }
+    public func itemAddFromArray(items: [Object]) {
+        for item in items {
+            itemAdd(item)
+        }
+    }
     public func itemUpdateAt(index: Int, item: Object) -> Bool {
         if 0..<itemsCount ~= index {
             let old = items[index]
