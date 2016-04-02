@@ -51,6 +51,20 @@ public class CacheManager {
             return nil
         }
     }
+    public func itemFirst() -> Object? {
+        if itemsCount > 0 {
+            return items[0]
+        } else {
+            return nil
+        }
+    }
+    public func itemLast() -> Object? {
+        if itemsCount > 0 {
+            return items[itemsCount-1]
+        } else {
+            return nil
+        }
+    }
     public func itemAdd(item: Object) {
         if items.contains(item) == false {
             items.append(item)

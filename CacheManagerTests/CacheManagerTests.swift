@@ -52,6 +52,14 @@ class ManagerTests: QuickSpec {
                 it("exists") {
                     expect(sut.items).toNot(beNil())
                 }
+                it("returns first item") {
+                    sut.itemAdd(dummy)
+                    expect(sut.itemFirst()).to(equal(dummy))
+                }
+                it("returns last item") {
+                    sut.itemAdd(dummy)
+                    expect(sut.itemLast()).to(equal(dummy))
+                }
                 it("gets item at index") {
                     sut.itemAdd(dummy)
                     let check = sut.itemAt(0)
