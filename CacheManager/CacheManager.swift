@@ -9,23 +9,34 @@
 import Foundation
 import RealmSwift
 
+
+public enum CachePriority {
+    case LocalThenRemote
+    case RemoteThenLocal
+    case RemoteOnly
+}
+
 public class CacheManager {
+    public var realm = RealmProvider.realm()
+    public var priority: CachePriority = .LocalThenRemote
     public var items = [Object]() {
         didSet {
             itemsUpdated()
         }
     }
-    public var realm = RealmProvider.realm()
     public var itemsCount: Int {
         return items.count
     }
     public var itemsUpdated: () -> () = {
-        
+        // used as notification for updates (eg. table reload)
     }
 
     required public init() {
-        itemsFromCache()
-        itemsFromRemote()
+        if priority == .LocalThenRemote {
+            itemsFromCache()
+            itemsFromRemote()
+        }
+        // TODO: need to improve this w/ other options
     }
     public func itemsFromCache() {
         // swiftlint:disable force_try
