@@ -9,7 +9,6 @@
 import Foundation
 import RealmSwift
 
-
 public enum CachePriority {
     case LocalThenRemote
     case RemoteThenLocal
@@ -101,7 +100,7 @@ public class CacheManager {
 
 class RealmProvider {
     class func realm() -> Realm {
-        if let _ = NSClassFromString("XCTest") {
+        if let _ = NSClassFromString("QuickSpec") {
             // swiftlint:disable force_try
             return try! Realm(
                 configuration: Realm.Configuration(
