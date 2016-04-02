@@ -25,10 +25,14 @@ public class CacheManager {
 
     required public init() {
         itemsFromCache()
+        itemsFromRemote()
     }
     public func itemsFromCache() {
         // swiftlint:disable force_try
         // items = Array(try! realm.objects(Object))
+    }
+    public func itemsFromRemote() {
+        
     }
     public func itemAt(index: Int) -> Object? {
         if 0..<itemsCount ~= index {
