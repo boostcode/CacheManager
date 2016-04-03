@@ -21,6 +21,7 @@ public class CacheManager {
     public var items = [Object]() {
         didSet {
             itemsUpdated()
+            itemsFilter()
         }
     }
     public var itemsFiltered = [Object]() {
