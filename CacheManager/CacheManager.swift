@@ -41,6 +41,9 @@ public class CacheManager {
     public var itemsFilteredUpdated: () -> () = {
         // used as notification for updates from filtered (eg. table reload)
     }
+    public var itemsFilter: () -> () = {
+        
+    }
 
     required public init() {
         if priority == .LocalThenRemote {
@@ -56,9 +59,9 @@ public class CacheManager {
     public func itemsFromRemote() {
         
     }
-    public func itemsFilter() {
+    //public func itemsFilter() -> () {
         
-    }
+    //}
     public func itemAt(index: Int) -> Object? {
         if 0..<itemsCount ~= index {
             return items[index]

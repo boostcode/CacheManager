@@ -223,15 +223,13 @@ class DummyManager: CacheManager {
         super.itemsFilteredUpdated = {
             self.filtered = true
         }
+        super.itemsFilter = {
+            super.itemsFiltered = super.items.filter { $0 != nil }
+        }
     }
     
     override func itemsFromCache() {
         // swiftlint:disable force_try
         super.items = Array(try! realm.objects(DummyObject))
     }
-    
-    override func itemsFilter() {
-        super.itemsFiltered = super.items.filter { $0 != nil }
-    }
-
 }
