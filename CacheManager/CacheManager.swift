@@ -21,28 +21,13 @@ public class CacheManager {
     public var items = [Object]() {
         didSet {
             itemsUpdated()
-            itemsFilter()
-        }
-    }
-    public var itemsFiltered = [Object]() {
-        didSet {
-            itemsFilteredUpdated()
         }
     }
     public var itemsCount: Int {
         return items.count
     }
-    public var itemsFilteredCount: Int {
-        return itemsFiltered.count
-    }
     public var itemsUpdated: () -> () = {
         // used as notification for updates (eg. table reload)
-    }
-    public var itemsFilteredUpdated: () -> () = {
-        // used as notification for updates from filtered (eg. table reload)
-    }
-    public var itemsFilter: () -> () = {
-        
     }
 
     required public init() {
@@ -57,10 +42,10 @@ public class CacheManager {
         // items = Array(try! realm.objects(Object))
     }
     public func itemsFromRemote() {
-        
+
     }
     //public func itemsFilter() -> () {
-        
+
     //}
     public func itemAt(index: Int) -> Object? {
         if 0..<itemsCount ~= index {

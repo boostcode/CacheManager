@@ -14,28 +14,28 @@ import RealmSwift
 
 class ManagerTests: QuickSpec {
     override func spec() {
-        
+
         var sut: DummyManager!
         var realm: Realm!
-        
+
         var dummy: DummyObject!
         var dummy2: DummyObject!
-        
+
         beforeEach() {
             sut = DummyManager()
-            
+
             dummy = DummyObject()
             dummy.name = "dummy"
             dummy2 = DummyObject()
             dummy2.name = "dummy2"
-            
+
             realm = RealmProvider.realm()
             // swiftlint:disable force_try
             try! realm.write {
                 realm.deleteAll()
             }
         }
-        
+
         describe("manager") {
             context("items counter") {
                 it("exists") {
@@ -143,7 +143,7 @@ class ManagerTests: QuickSpec {
                     expect(sut.realm.objects(DummyObject).count).to(equal(1))
                     expect(sut.realm.objects(DummyObject)[0]).to(equal(dummy))
                 }
-                it("updates item"){
+                it("updates item") {
                     expect(sut.realm.objects(DummyObject).count).to(equal(0))
                     sut.itemAdd(dummy)
                     expect(sut.realm.objects(DummyObject).count).to(equal(1))
@@ -179,27 +179,6 @@ class ManagerTests: QuickSpec {
                     sut.itemAdd(dummy)
                     expect(sut.updated).to(beTrue())
                 }
-                it("on items filtered update") {
-                    sut.filtered = false
-                    expect(sut.filtered).to(beFalse())
-                    sut.itemsFilter()
-                    expect(sut.filtered).to(beTrue())
-                }
-            }
-            context("filtering") {
-                it("has a filtered item array") {
-                    expect(sut.itemsFiltered).toNot(beNil())
-                }
-                it("has a item counter") {
-                    expect(sut.itemsFilteredCount).to(equal(0))
-                    expect(sut.itemsFilteredCount).to(equal(sut.itemsFiltered.count))
-                }
-                it("has a closure for filtering") {
-                    expect(sut.itemsFilter()).toNot(beNil())
-                }
-                it("at beginning is equal to items") {
-                    expect(sut.items).to(equal(sut.itemsFiltered))
-                }
             }
         }
     }
@@ -210,24 +189,18 @@ class DummyObject: Object {
 }
 
 class DummyManager: CacheManager {
-    
+
     var updated = false
     var filtered = false
-    
+
     required init() {
         super.init()
         super.items = [DummyObject]()
         super.itemsUpdated = {
             self.updated = true
         }
-        super.itemsFilteredUpdated = {
-            self.filtered = true
-        }
-        super.itemsFilter = {
-            super.itemsFiltered = super.items.filter { $0 != nil }
-        }
     }
-    
+
     override func itemsFromCache() {
         // swiftlint:disable force_try
         super.items = Array(try! realm.objects(DummyObject))
