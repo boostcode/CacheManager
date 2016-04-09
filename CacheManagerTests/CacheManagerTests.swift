@@ -22,7 +22,7 @@ class ManagerTests: QuickSpec {
         var dummy2: DummyObject!
 
         beforeEach() {
-            sut = DummyManager()
+            sut = DummyManager(DummyObject())
 
             dummy = DummyObject()
             dummy.name = "dummy"
@@ -191,18 +191,18 @@ class DummyObject: Object {
 class DummyManager: CacheManager {
 
     var updated = false
-    var filtered = false
 
-    required init() {
-        super.init()
-        super.items = [DummyObject]()
+    required init(_ type: Object) {
+        super.init(type)
         super.itemsUpdated = {
             self.updated = true
         }
+
     }
 
-    override func itemsFromCache() {
+
+    /*override func itemsFromCache() {
         // swiftlint:disable force_try
         super.items = Array(try! realm.objects(DummyObject))
-    }
+    }*/
 }

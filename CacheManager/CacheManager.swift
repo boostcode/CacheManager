@@ -16,8 +16,10 @@ public enum CachePriority {
 }
 
 public class CacheManager {
+    private var itemType: Object
+
     public var realm = RealmProvider.realm()
-    public var priority: CachePriority = .LocalThenRemote
+    public var cachePriority: CachePriority = .LocalThenRemote
     public var items = [Object]() {
         didSet {
             itemsUpdated()
@@ -30,23 +32,27 @@ public class CacheManager {
         // used as notification for updates (eg. table reload)
     }
 
-    required public init() {
-        if priority == .LocalThenRemote {
+    required public init(_ type: Object) {
+        // store item type
+        itemType = type
+        // force init func casting type
+        items = [itemType]
+        // TODO: need to improve this w/ other options
+        switch cachePriority {
+        case .LocalThenRemote:
             itemsFromCache()
             itemsFromRemote()
+        default:
+            itemsFromRemote()
         }
-        // TODO: need to improve this w/ other options
     }
     public func itemsFromCache() {
         // swiftlint:disable force_try
-        // items = Array(try! realm.objects(Object))
+        items = Array(try! realm.objects(Object))
     }
     public func itemsFromRemote() {
 
     }
-    //public func itemsFilter() -> () {
-
-    //}
     public func itemAt(index: Int) -> Object? {
         if 0..<itemsCount ~= index {
             return items[index]
