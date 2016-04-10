@@ -9,11 +9,16 @@
 import Foundation
 import RealmSwift
 
+public protocol CacheManagerDelegate {
+    func cacheHasUpdate()
+}
+
 public class CacheManager {
+    public var delegate: CacheManagerDelegate?
     public var realm = RealmProvider.realm()
-    public var items = [Object]() {
+    public var items: Results<Object>! {
         didSet {
-            itemsUpdated()
+            delegate?.cacheHasUpdate()
         }
     }
     public var itemsCount: Int {
@@ -24,7 +29,7 @@ public class CacheManager {
     }
     public func itemsFromCache() {
         // swiftlint:disable force_try
-        items = Array(try! realm.objects(Object))
+        items = try! realm.objects(Object)
     }
     public func itemsFromRemote() {
 
