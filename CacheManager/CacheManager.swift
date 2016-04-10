@@ -9,17 +9,8 @@
 import Foundation
 import RealmSwift
 
-public enum CachePriority {
-    case LocalThenRemote
-    case RemoteThenLocal
-    case RemoteOnly
-}
-
 public class CacheManager {
-    private var itemType: Object
-
     public var realm = RealmProvider.realm()
-    public var cachePriority: CachePriority = .LocalThenRemote
     public var items = [Object]() {
         didSet {
             itemsUpdated()
@@ -30,21 +21,6 @@ public class CacheManager {
     }
     public var itemsUpdated: () -> () = {
         // used as notification for updates (eg. table reload)
-    }
-
-    required public init(_ type: Object) {
-        // store item type
-        itemType = type
-        // force init func casting type
-        items = [itemType]
-        // TODO: need to improve this w/ other options
-        switch cachePriority {
-        case .LocalThenRemote:
-            itemsFromCache()
-            itemsFromRemote()
-        default:
-            itemsFromRemote()
-        }
     }
     public func itemsFromCache() {
         // swiftlint:disable force_try
