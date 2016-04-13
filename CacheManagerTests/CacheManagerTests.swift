@@ -16,36 +16,29 @@ class ManagerTests: QuickSpec {
     override func spec() {
 
         var sut: DummyManager!
-        var realm: Realm!
 
         var dummy: DummyObject!
         var dummy2: DummyObject!
 
-        beforeEach() {
-            sut = DummyManager(DummyObject())
+        /*beforeEach() {
+            sut = DummyManager()
 
             dummy = DummyObject()
             dummy.name = "dummy"
             dummy2 = DummyObject()
             dummy2.name = "dummy2"
+        }*/
 
-            realm = RealmProvider.realm()
-            // swiftlint:disable force_try
-            try! realm.write {
-                realm.deleteAll()
-            }
-        }
-
-        describe("manager") {
+        /*describe("manager") {
             context("items counter") {
                 it("exists") {
-                    expect(sut.itemsCount).toNot(beNil())
+                    expect(sut.count).toNot(beNil())
                 }
                 it("is 0 at init") {
-                    expect(sut.itemsCount).to(equal(0))
+                    expect(sut.count).to(equal(0))
                 }
                 it("is the same values of array items") {
-                    expect(sut.itemsCount).to(equal(sut.items.count))
+                    expect(sut.count).to(equal(sut.items.count))
                 }
             }
             context("items array") {
@@ -133,45 +126,6 @@ class ManagerTests: QuickSpec {
                     expect(success).to(beFalse())
                 }
             }
-            context("realm cache") {
-                it("exists") {
-                    expect(sut.realm).toNot(beNil())
-                }
-                it("adds added") {
-                    expect(sut.realm.objects(DummyObject).count).to(equal(0))
-                    sut.itemAdd(dummy)
-                    expect(sut.realm.objects(DummyObject).count).to(equal(1))
-                    expect(sut.realm.objects(DummyObject)[0]).to(equal(dummy))
-                }
-                it("updates item") {
-                    expect(sut.realm.objects(DummyObject).count).to(equal(0))
-                    sut.itemAdd(dummy)
-                    expect(sut.realm.objects(DummyObject).count).to(equal(1))
-                    sut.itemUpdateAt(0, item: dummy2)
-                    expect(sut.realm.objects(DummyObject)[0]).to(equal(dummy2))
-                }
-                it("removes delete") {
-                    expect(sut.realm.objects(DummyObject).count).to(equal(0))
-                    sut.itemAdd(dummy)
-                    expect(sut.realm.objects(DummyObject).count).to(equal(1))
-                    sut.itemRemoveAll()
-                    expect(sut.realm.objects(DummyObject).count).to(equal(0))
-                }
-                it("handles cache") {
-                    expect(sut.realm.objects(DummyObject).count).to(equal(0))
-                    sut.itemAdd(dummy)
-                    expect(sut.realm.objects(DummyObject).count).to(equal(1))
-                    expect(sut.itemsCount).to(equal(1))
-                    // test removing only item locally and not in cache
-                    sut.items.removeAll()
-                    expect(sut.realm.objects(DummyObject).count).to(equal(1))
-                    expect(sut.itemsCount).to(equal(0))
-                    // try to restore locally the realm cache
-                    sut.itemsFromCache()
-                    expect(sut.realm.objects(DummyObject).count).to(equal(1))
-                    expect(sut.itemsCount).to(equal(1))
-                }
-            }
             context("notification") {
                 it("on items update") {
                     sut.updated = false
@@ -180,7 +134,7 @@ class ManagerTests: QuickSpec {
                     expect(sut.updated).to(beTrue())
                 }
             }
-        }
+        }*/
     }
 }
 
@@ -188,21 +142,12 @@ class DummyObject: Object {
     dynamic var name: String = ""
 }
 
-class DummyManager: CacheManager {
+class DummyManager: CacheManager<DummyObject>, CacheManagerDelegate {
 
     var updated = false
 
-    required init(_ type: Object) {
-        super.init(type)
-        super.itemsUpdated = {
-            self.updated = true
-        }
-
+    func cacheHasUpdate() {
+        self.updated = true
     }
 
-
-    /*override func itemsFromCache() {
-        // swiftlint:disable force_try
-        super.items = Array(try! realm.objects(DummyObject))
-    }*/
 }

@@ -13,56 +13,79 @@ public protocol CacheManagerDelegate {
     func cacheHasUpdate()
 }
 
-public class CacheManager {
-    public var delegate: CacheManagerDelegate?
-    public var realm = RealmProvider.realm()
-    public var items: Results<Object>! {
+private protocol CacheManagerProtocol {
+    associatedtype T: Object
+    var realm: Realm { get }
+    var count: Int { get }
+    var items: List<T> { get }
+    var _items: List<T> { get set }
+}
+
+public class CacheManager<T where T: Object>: CacheManagerProtocol {
+
+    init() {
+        items = List<T>()
+    }
+
+    public var realm: Realm {
+        return RealmProvider.realm()
+    }
+    var items: List<T> {
         didSet {
             delegate?.cacheHasUpdate()
         }
     }
-    public var itemsCount: Int {
+    private var _items: List<T> {
+        get {
+            return self.items
+        }
+        set (newValue) {
+            if newValue != items {
+                self.items = newValue
+            }
+        }
+    }
+
+    public var count: Int {
         return items.count
     }
-    public var itemsUpdated: () -> () = {
-        // used as notification for updates (eg. table reload)
-    }
-    public func itemsFromCache() {
-        // swiftlint:disable force_try
-        items = try! realm.objects(Object)
-    }
-    public func itemsFromRemote() {
 
-    }
+    public var delegate: CacheManagerDelegate?
+
+}
+
+extension CacheManager {
     public func itemAt(index: Int) -> Object? {
-        if 0..<itemsCount ~= index {
+        if 0..<count ~= index {
             return items[index]
         } else {
             return nil
         }
     }
     public func itemFirst() -> Object? {
-        if itemsCount > 0 {
+        if count > 0 {
             return items[0]
         } else {
             return nil
         }
     }
     public func itemLast() -> Object? {
-        if itemsCount > 0 {
-            return items[itemsCount-1]
+        if count > 0 {
+            return items[count-1]
         } else {
             return nil
         }
     }
+}
+
+extension CacheManager {
     public func itemAdd(item: Object) {
-        if items.contains(item) == false {
-            items.append(item)
+       /* if items.contains(item) == false {
             // swiftlint:disable force_try
             try! realm.write {
                 realm.add(item)
             }
-        }
+        }*/
     }
     public func itemAddFromArray(items: [Object]) {
         for item in items {
@@ -70,9 +93,8 @@ public class CacheManager {
         }
     }
     public func itemUpdateAt(index: Int, item: Object) -> Bool {
-        if 0..<itemsCount ~= index {
+        if 0..<count ~= index {
             let old = items[index]
-            items[index] = item
             try! realm.write {
                 realm.delete(old)
                 realm.add(item)
@@ -82,9 +104,8 @@ public class CacheManager {
         return false
     }
     public func itemRemoveAt(index: Int) -> Bool {
-        if 0..<itemsCount ~= index {
+        if 0..<count ~= index {
             let item = items[index]
-            items.removeAtIndex(index)
             // swiftlint:disable force_try
             try! realm.write {
                 realm.delete(item)
@@ -94,13 +115,14 @@ public class CacheManager {
         return false
     }
     public func itemRemoveAll() {
-        items.removeAll()
         // swiftlint:disable force_try
         try! realm.write {
             realm.deleteAll()
         }
     }
+
 }
+
 
 class RealmProvider {
     class func realm() -> Realm {
