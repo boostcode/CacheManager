@@ -15,21 +15,25 @@ import RealmSwift
 class ManagerTests: QuickSpec {
     override func spec() {
 
-        var sut: DummyManager!
+        var sut = CacheManager<DummyObject>()
 
         var dummy: DummyObject!
         var dummy2: DummyObject!
 
-        /*beforeEach() {
-            sut = DummyManager()
+        beforeEach() {
+
+            sut = CacheManager<DummyObject>()
+
+            sut.itemRemoveAll()
 
             dummy = DummyObject()
             dummy.name = "dummy"
             dummy2 = DummyObject()
             dummy2.name = "dummy2"
-        }*/
 
-        /*describe("manager") {
+        }
+
+        describe("manager") {
             context("items counter") {
                 it("exists") {
                     expect(sut.count).toNot(beNil())
@@ -86,17 +90,12 @@ class ManagerTests: QuickSpec {
                     sut.itemAdd(dummy)
                     expect(sut.items.count).to(equal(1))
                     expect(sut.itemAt(0)).to(equal(dummy))
-                    let success = sut.itemUpdateAt(0, item: dummy2)
+                    let tmp = sut.itemAt(0)
+                    //tmp!.secondary = "test2"
+                    //sut.itemUpdate(tmp!)
+                    sut.itemUpdate(tmp!, key: "secondary", value: "test2")
                     expect(sut.items.count).to(equal(1))
-                    expect(sut.itemAt(0)).to(equal(dummy2))
-                    expect(success).to(beTrue())
-                }
-                it("doesn't update item out of range") {
-                    sut.itemAdd(dummy)
-                    expect(sut.items.count).to(equal(1))
-                    expect(sut.itemAt(0)).to(equal(dummy))
-                    let success = sut.itemUpdateAt(5, item: dummy2)
-                    expect(success).to(beFalse())
+                    expect(sut.itemAt(0)).to(equal(tmp!))
                 }
                 it("removes item") {
                     expect(sut.items.count).to(equal(0))
@@ -104,9 +103,9 @@ class ManagerTests: QuickSpec {
                     expect(sut.items.count).to(equal(1))
                     sut.itemAdd(dummy2)
                     expect(sut.items.count).to(equal(2))
-                    sut.itemRemoveAt(0)
+                    sut.itemRemove(dummy2)
                     expect(sut.items.count).to(equal(1))
-                    sut.itemRemoveAt(0)
+                    sut.itemRemove(dummy)
                     expect(sut.items.count).to(equal(0))
                 }
                 it("removes all items") {
@@ -117,32 +116,29 @@ class ManagerTests: QuickSpec {
                     sut.itemRemoveAll()
                     expect(sut.items.count).to(equal(0))
                 }
-                it("doesn't remove out of range") {
-                    expect(sut.items.count).to(equal(0))
-                    sut.itemAdd(dummy)
-                    expect(sut.items.count).to(equal(1))
-                    let success = sut.itemRemoveAt(5)
-                    expect(sut.items.count).to(equal(1))
-                    expect(success).to(beFalse())
-                }
             }
-            context("notification") {
+            /*context("notification") {
                 it("on items update") {
                     sut.updated = false
                     expect(sut.updated).to(beFalse())
                     sut.itemAdd(dummy)
                     expect(sut.updated).to(beTrue())
                 }
-            }
-        }*/
+            }*/
+        }
     }
 }
 
 class DummyObject: Object {
     dynamic var name: String = ""
+    dynamic var secondary: String = ""
+
+    override static func primaryKey() -> String? {
+        return "name"
+    }
 }
 
-class DummyManager: CacheManager<DummyObject>, CacheManagerDelegate {
+/*class DummyManager: CacheManager<DummyObject>, CacheManagerDelegate {
 
     var updated = false
 
@@ -150,4 +146,4 @@ class DummyManager: CacheManager<DummyObject>, CacheManagerDelegate {
         self.updated = true
     }
 
-}
+}*/
