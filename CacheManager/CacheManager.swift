@@ -29,13 +29,14 @@ public class CacheManager<T where T: Object> {
 
     public var delegate: CacheManagerDelegate?
 
-    init() {
+    public init() {
         syncCacheItems()
     }
 
-    public func getRemoteItems() {
-    }
+    public func getRemoteItems() {}
+}
 
+extension CacheManager {
     private func getCacheItems<T: Object>(type: T.Type) -> Results<T> {
         return realm.objects(T)
     }
@@ -43,7 +44,6 @@ public class CacheManager<T where T: Object> {
     private func syncCacheItems() {
         items = getCacheItems(T)
     }
-
 }
 
 extension CacheManager {
