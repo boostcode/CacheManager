@@ -33,8 +33,7 @@ public class CacheManager<T where T: Object> {
         syncCacheItems()
     }
 
-    public func getRemoteItems(items: [T]) {
-        itemAddFromArray(items)
+    public func getRemoteItems() {
     }
 
     private func getCacheItems<T: Object>(type: T.Type) -> Results<T> {
