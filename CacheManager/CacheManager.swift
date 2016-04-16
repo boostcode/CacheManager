@@ -33,7 +33,7 @@ public class CacheManager<T where T: Object> {
         syncCacheItems()
     }
 
-    public func getRemoteItems() {}
+    public func getRemoteItems(completion: (error: NSError?)->()) {}
 }
 
 extension CacheManager {
