@@ -30,15 +30,19 @@ public class CacheManager<T where T: Object> {
     public var delegate: CacheManagerDelegate?
 
     init() {
-        syncItems()
+        syncCacheItems()
     }
 
-    private func getItems<T: Object>(type: T.Type) -> Results<T> {
+    public func getRemoteItems(items: [T]) {
+        itemAddFromArray(items)
+    }
+
+    private func getCacheItems<T: Object>(type: T.Type) -> Results<T> {
         return realm.objects(T)
     }
 
-    private func syncItems() {
-        items = getItems(T)
+    private func syncCacheItems() {
+        items = getCacheItems(T)
     }
 
 }
@@ -72,7 +76,7 @@ extension CacheManager {
         // swiftlint:disable force_try
         try! realm.write {
             realm.add(item, update: true)
-            syncItems()
+            syncCacheItems()
         }
     }
     public func itemAddFromArray(items: [T]) {
@@ -84,7 +88,7 @@ extension CacheManager {
         // swiftlint:disable force_try
         try! realm.write {
             realm.add(item, update: true)
-            syncItems()
+            syncCacheItems()
         }
     }
     public func itemUpdate(item: T, key: String, value: AnyObject) {
@@ -96,14 +100,14 @@ extension CacheManager {
         // swiftlint:disable force_try
         try! realm.write {
             realm.delete(item)
-            syncItems()
+            syncCacheItems()
         }
     }
     public func itemRemoveAll() {
         // swiftlint:disable force_try
         try! realm.write {
             realm.deleteAll()
-            syncItems()
+            syncCacheItems()
         }
     }
 
