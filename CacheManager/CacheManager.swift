@@ -103,6 +103,8 @@ extension CacheManager {
     public func itemUpdate(item: T, key: String, value: AnyObject) {
         try! realm.write {
             item[key] = value
+            syncCacheItems()
+            delegate?.cacheHasUpdate()
         }
     }
     public func itemRemove(item: T) {
