@@ -29,6 +29,12 @@ public class CacheManager<T where T: Object> {
 
     public var delegate: CacheManagerDelegate?
 
+    public var filter: NSPredicate? {
+        didSet {
+            syncCacheItems()
+        }
+    }
+
     public init() {
         syncCacheItems()
     }
@@ -42,7 +48,11 @@ extension CacheManager {
     }
 
     private func syncCacheItems() {
-        items = getCacheItems(T)
+        if let filter = self.filter {
+            items = getCacheItems(T).filter(filter)
+        } else {
+            items = getCacheItems(T)
+        }
     }
 }
 
