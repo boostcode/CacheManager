@@ -91,8 +91,6 @@ class ManagerTests: QuickSpec {
                     expect(sut.items.count).to(equal(1))
                     expect(sut.itemAt(0)).to(equal(dummy))
                     let tmp = sut.itemAt(0)
-                    //tmp!.secondary = "test2"
-                    //sut.itemUpdate(tmp!)
                     sut.itemUpdate(tmp!, key: "secondary", value: "test2")
                     expect(sut.items.count).to(equal(1))
                     expect(sut.itemAt(0)).to(equal(tmp!))
@@ -116,6 +114,17 @@ class ManagerTests: QuickSpec {
                     sut.itemRemoveAll()
                     expect(sut.items.count).to(equal(0))
                 }
+                it("support ignorable keys on update") {
+                    sut.ignoreOnUpdate = ["update"]
+                    expect(sut.items.count).to(equal(0))
+                    sut.itemAdd(dummy)
+                    expect(sut.items.count).to(equal(1))
+                    sut.itemUpdate(dummy, key: "update", value: true)
+                    expect(sut.itemAt(0)!.update).to(equal(true))
+                    sut.itemAdd(dummy)
+                    expect(sut.items.count).to(equal(1))
+                    expect(sut.itemAt(0)!.update).to(equal(true))
+                }
             }
             /*context("notification") {
                 it("on items update") {
@@ -132,6 +141,7 @@ class ManagerTests: QuickSpec {
 class DummyObject: Object {
     dynamic var name: String = ""
     dynamic var secondary: String = ""
+    dynamic var update = false
 
     override static func primaryKey() -> String? {
         return "name"

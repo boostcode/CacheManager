@@ -29,6 +29,8 @@ public class CacheManager<T where T: Object> {
 
     public var delegate: CacheManagerDelegate?
 
+    public var ignoreOnUpdate: [String] = []
+
     public var filter: NSPredicate? {
         didSet {
             syncCacheItems()
@@ -84,6 +86,16 @@ extension CacheManager {
     public func itemAdd(item: T) {
         // swiftlint:disable force_try
         try! realm.write {
+
+            if let currentObject = try! realm.objectForPrimaryKey(T.self, key: item[T.primaryKey()!]!) {
+
+                for ignore in ignoreOnUpdate {
+                    if let current = currentObject[ignore] {
+                        item[ignore] = current
+                    }
+                }
+            }
+
             realm.add(item, update: true)
             syncCacheItems()
         }
