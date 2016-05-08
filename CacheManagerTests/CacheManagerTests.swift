@@ -125,6 +125,23 @@ class ManagerTests: QuickSpec {
                     expect(sut.items.count).to(equal(1))
                     expect(sut.itemAt(0)!.update).to(equal(true))
                 }
+                it("can filter") {
+                    expect(sut.items.count).to(equal(0))
+                    sut.itemAdd(dummy)
+                    sut.itemAdd(dummy2)
+                    let predicate = NSPredicate(format: "name = %@", "dummy2")
+                    sut.filter = predicate
+                    expect(sut.items.count).to(equal(1))
+
+                }
+                it("can be ordered") {
+                    expect(sut.items.count).to(equal(0))
+                    sut.itemAdd(dummy)
+                    sut.itemAdd(dummy2)
+                    sut.sortAscending = false
+                    sut.sort = "name"
+                    expect(sut.itemAt(0)!.name).to(equal(dummy2.name))
+                }
             }
             /*context("notification") {
                 it("on items update") {

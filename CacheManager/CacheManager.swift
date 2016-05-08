@@ -31,6 +31,18 @@ public class CacheManager<T where T: Object> {
 
     public var ignoreOnUpdate: [String] = []
 
+    public var sort: String? {
+        didSet {
+            syncCacheItems()
+        }
+    }
+
+    public var sortAscending: Bool? {
+        didSet {
+            syncCacheItems()
+        }
+    }
+
     public var filter: NSPredicate? {
         didSet {
             syncCacheItems()
@@ -50,11 +62,19 @@ extension CacheManager {
     }
 
     private func syncCacheItems() {
+
+        var tmp = getCacheItems(T)
+
         if let filter = self.filter {
-            items = getCacheItems(T).filter(filter)
-        } else {
-            items = getCacheItems(T)
+            tmp = tmp.filter(filter)
         }
+
+        if let order = self.sort {
+            tmp = tmp.sorted(order, ascending: sortAscending!)
+        }
+
+        items = tmp
+
     }
 }
 
