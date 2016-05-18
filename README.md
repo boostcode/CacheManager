@@ -4,9 +4,9 @@ Used with [Moya](https://github.com/Moya/Moya) it easily helps you to cache remo
 
 ### Features
 
-You have simple to build an ***Object*** realm class and then create you ObjectManager using ***CacheManager<Object>***.
+You have simple to build an **Object** realm class and then create you ObjectManager using **CacheManager<Object>**.
 
-***CacheManager*** will allows you to:
+**CacheManager** will allows you to:
 * count items
 * ignoreOnUpdate key
 * sort & sortAscending on a key
