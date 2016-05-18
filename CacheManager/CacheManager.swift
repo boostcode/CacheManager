@@ -156,7 +156,6 @@ extension CacheManager {
 
 }
 
-
 class RealmProvider {
     class func realm() -> Realm {
         if let _ = NSClassFromString("QuickSpec") {

@@ -14,14 +14,12 @@ import RealmSwift
 
 class ManagerTests: QuickSpec {
     override func spec() {
-
         var sut = CacheManager<DummyObject>()
 
         var dummy: DummyObject!
         var dummy2: DummyObject!
 
         beforeEach() {
-
             sut = CacheManager<DummyObject>()
 
             sut.itemRemoveAll()
@@ -164,13 +162,3 @@ class DummyObject: Object {
         return "name"
     }
 }
-
-/*class DummyManager: CacheManager<DummyObject>, CacheManagerDelegate {
-
-    var updated = false
-
-    func cacheHasUpdate() {
-        self.updated = true
-    }
-
-}*/
