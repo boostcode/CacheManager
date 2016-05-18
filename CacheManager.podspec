@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
    s.license = { :type => "MIT", :file => "LICENSE" }
    s.author = { "Matteo Crippa" => "matteo@boostco.de" }
    s.homepage = "http://boostco.de"
-   s.source = { :git => "https://gitlab.com/matteocrippa/cachemanager-lib-ios.git", :tag => "0.0.1"}
+   s.source = { :git => "git@github.com:boostcode/CacheManager.git", :tag => "0.0.1"}
    s.framework = 'Foundation'
    s.dependency 'RealmSwift'
    s.source_files = "CacheManager/*.{swift}"
