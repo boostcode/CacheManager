@@ -16,7 +16,7 @@ You have simple to build an **Object** realm class and then create you ObjectMan
 
 #### Pod
 ```
-pod 'CacheManager', '0.0.1'
+pod 'CacheManager', '0.0.2'
 ```
 
 ### Usage
