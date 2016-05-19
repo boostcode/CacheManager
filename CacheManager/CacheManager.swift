@@ -162,7 +162,7 @@ class RealmProvider {
             // swiftlint:disable force_try
             return try! Realm(
                 configuration: Realm.Configuration(
-                    path: nil,
+                    fileURL: nil,
                     inMemoryIdentifier: "test",
                     encryptionKey: nil,
                     readOnly: false,
