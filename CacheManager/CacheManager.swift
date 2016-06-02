@@ -62,7 +62,6 @@ extension CacheManager {
     }
 
     private func syncCacheItems() {
-
         var tmp = getCacheItems(T)
 
         if let filter = self.filter {
@@ -78,6 +77,7 @@ extension CacheManager {
     }
 }
 
+// MARK: - Getter
 extension CacheManager {
     public func itemAt(index: Int) -> T? {
         if 0..<count ~= index {
@@ -102,12 +102,13 @@ extension CacheManager {
     }
 }
 
+// MARK: - Setters
 extension CacheManager {
-    public func itemAdd(item: T) {
+    public func itemAdd(item: T, forceSync: Bool = true) {
         // swiftlint:disable force_try
         try! realm.write {
 
-            if let currentObject = try! realm.objectForPrimaryKey(T.self, key: item[T.primaryKey()!]!) {
+            if let currentObject = realm.objectForPrimaryKey(T.self, key: item[T.primaryKey()!]!) {
 
                 for ignore in ignoreOnUpdate {
                     if let current = currentObject[ignore] {
@@ -117,13 +118,16 @@ extension CacheManager {
             }
 
             realm.add(item, update: true)
-            syncCacheItems()
+            if forceSync == true {
+                syncCacheItems()
+            }
         }
     }
     public func itemAddFromArray(items: [T]) {
         for item in items {
-            itemAdd(item)
+            itemAdd(item, forceSync: false)
         }
+        syncCacheItems()
     }
     public func itemUpdate(item: T) {
         // swiftlint:disable force_try
@@ -156,6 +160,7 @@ extension CacheManager {
 
 }
 
+// MARK: - Realm handler
 class RealmProvider {
     class func realm() -> Realm {
         if let _ = NSClassFromString("QuickSpec") {
