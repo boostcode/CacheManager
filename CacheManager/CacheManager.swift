@@ -79,6 +79,9 @@ extension CacheManager {
 
 // MARK: - Getter
 extension CacheManager {
+    public func itemAll() -> [T?] {
+        return items.map({ $0 })
+    }
     public func itemAt(index: Int) -> T? {
         if 0..<count ~= index {
             return items[index]
