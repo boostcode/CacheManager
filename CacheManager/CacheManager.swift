@@ -13,9 +13,9 @@ public protocol CacheManagerDelegate {
     func cacheHasUpdate()
 }
 
-public class CacheManager<T where T: Object> {
+open class CacheManager<T> where T: Object {
 
-    private var realm = RealmProvider.realm()
+    fileprivate var realm = RealmProvider.realm()
 
     var items: Results<T>! {
         didSet {
@@ -23,27 +23,27 @@ public class CacheManager<T where T: Object> {
         }
     }
 
-    public var count: Int {
+    open var count: Int {
         return items.count
     }
 
-    public var delegate: CacheManagerDelegate?
+    open var delegate: CacheManagerDelegate?
 
-    public var ignoreOnUpdate: [String] = []
+    open var ignoreOnUpdate: [String] = []
 
-    public var sort: String? {
+    open var sort: String? {
         didSet {
             syncCacheItems()
         }
     }
 
-    public var sortAscending: Bool? {
+    open var sortAscending: Bool? {
         didSet {
             syncCacheItems()
         }
     }
 
-    public var filter: NSPredicate? {
+    open var filter: NSPredicate? {
         didSet {
             syncCacheItems()
         }
@@ -53,23 +53,23 @@ public class CacheManager<T where T: Object> {
         syncCacheItems()
     }
 
-    public func getRemoteItems(completion: (error: NSError?)->()) {}
+    open func getRemoteItems(_ completion: (_ error: NSError?)->()) {}
 }
 
 extension CacheManager {
-    private func getCacheItems<T: Object>(type: T.Type) -> Results<T> {
-        return realm.objects(T)
+    fileprivate func getCacheItems<T: Object>(_ type: T.Type) -> Results<T> {
+        return realm.objects(T.self)
     }
 
-    private func syncCacheItems() {
-        var tmp = getCacheItems(T)
+    fileprivate func syncCacheItems() {
+        var tmp = getCacheItems(T.self)
 
         if let filter = self.filter {
             tmp = tmp.filter(filter)
         }
 
         if let order = self.sort {
-            tmp = tmp.sorted(order, ascending: sortAscending!)
+            tmp = tmp.sorted(byKeyPath: order, ascending: sortAscending!)
         }
 
         items = tmp
@@ -82,7 +82,7 @@ extension CacheManager {
     public func itemAll() -> [T?] {
         return items.map({ $0 })
     }
-    public func itemAt(index: Int) -> T? {
+    public func itemAt(_ index: Int) -> T? {
         if 0..<count ~= index {
             return items[index]
         } else {
@@ -107,11 +107,11 @@ extension CacheManager {
 
 // MARK: - Setters
 extension CacheManager {
-    public func itemAdd(item: T, forceSync: Bool = true) {
+    public func itemAdd(_ item: T, forceSync: Bool = true) {
         // swiftlint:disable force_try
         try! realm.write {
 
-            if let currentObject = realm.objectForPrimaryKey(T.self, key: item[T.primaryKey()!]!) {
+            if let currentObject = realm.object(ofType: T.self, forPrimaryKey: item[T.primaryKey()!]! as AnyObject) {
 
                 for ignore in ignoreOnUpdate {
                     if let current = currentObject[ignore] {
@@ -126,27 +126,27 @@ extension CacheManager {
             }
         }
     }
-    public func itemAddFromArray(items: [T]) {
+    public func itemAddFromArray(_ items: [T]) {
         for item in items {
             itemAdd(item, forceSync: false)
         }
         syncCacheItems()
     }
-    public func itemUpdate(item: T) {
+    public func itemUpdate(_ item: T) {
         // swiftlint:disable force_try
         try! realm.write {
             realm.add(item, update: true)
             syncCacheItems()
         }
     }
-    public func itemUpdate(item: T, key: String, value: AnyObject) {
+    public func itemUpdate(_ item: T, key: String, value: AnyObject) {
         try! realm.write {
             item[key] = value
             syncCacheItems()
             delegate?.cacheHasUpdate()
         }
     }
-    public func itemRemove(item: T) {
+    public func itemRemove(_ item: T) {
         // swiftlint:disable force_try
         try! realm.write {
             realm.delete(item)

@@ -1,0 +1,10 @@
+excluded: # paths to ignore during linting. Takes precedence over `included`.
+  - Carthage
+  - Pods
+  - FANDOMIosAppTests
+
+# increase standard checks in order to have it at least working
+line_length: 180
+force_try: warning
+variable_name: 1
+type_body_length: 600 

@@ -139,12 +139,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4819D7B01CAEB7EF00271DD3 /* Build configuration list for PBXNativeTarget "CacheManager" */;
 			buildPhases = (
-				626D032B28569D7F4B005A7F /* 📦 Check Pods Manifest.lock */,
+				626D032B28569D7F4B005A7F /* [CP] Check Pods Manifest.lock */,
 				4819D7971CAEB7EE00271DD3 /* Sources */,
 				4819D7981CAEB7EE00271DD3 /* Frameworks */,
 				4819D7991CAEB7EE00271DD3 /* Headers */,
 				4819D79A1CAEB7EE00271DD3 /* Resources */,
-				1AE06BDFB54A02D90D3A5FEB /* 📦 Copy Pods Resources */,
+				1AE06BDFB54A02D90D3A5FEB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -159,12 +159,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4819D7B31CAEB7EF00271DD3 /* Build configuration list for PBXNativeTarget "CacheManagerTests" */;
 			buildPhases = (
-				3F39023D1C5ECF4DD51B770C /* 📦 Check Pods Manifest.lock */,
+				3F39023D1C5ECF4DD51B770C /* [CP] Check Pods Manifest.lock */,
 				4819D7A21CAEB7EF00271DD3 /* Sources */,
 				4819D7A31CAEB7EF00271DD3 /* Frameworks */,
 				4819D7A41CAEB7EF00271DD3 /* Resources */,
-				18FE973D7DE840619C6F4190 /* 📦 Embed Pods Frameworks */,
-				52FC21B7028442E9D3A474B7 /* 📦 Copy Pods Resources */,
+				18FE973D7DE840619C6F4190 /* [CP] Embed Pods Frameworks */,
+				52FC21B7028442E9D3A474B7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -183,14 +183,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = boostco.de;
 				TargetAttributes = {
 					4819D79B1CAEB7EE00271DD3 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0820;
 					};
 					4819D7A51CAEB7EF00271DD3 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -230,14 +232,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		18FE973D7DE840619C6F4190 /* 📦 Embed Pods Frameworks */ = {
+		18FE973D7DE840619C6F4190 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,14 +247,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CacheManagerTests/Pods-CacheManagerTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		1AE06BDFB54A02D90D3A5FEB /* 📦 Copy Pods Resources */ = {
+		1AE06BDFB54A02D90D3A5FEB /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,29 +262,29 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CacheManager/Pods-CacheManager-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3F39023D1C5ECF4DD51B770C /* 📦 Check Pods Manifest.lock */ = {
+		3F39023D1C5ECF4DD51B770C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		52FC21B7028442E9D3A474B7 /* 📦 Copy Pods Resources */ = {
+		52FC21B7028442E9D3A474B7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -290,19 +292,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-CacheManagerTests/Pods-CacheManagerTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		626D032B28569D7F4B005A7F /* 📦 Check Pods Manifest.lock */ = {
+		626D032B28569D7F4B005A7F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -349,8 +351,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -398,8 +402,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -419,6 +425,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -431,6 +438,7 @@
 			baseConfigurationReference = 060D2E510D8CAEA0A58B5BD0 /* Pods-CacheManager.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -442,6 +450,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -450,6 +459,7 @@
 			baseConfigurationReference = 43933ADAD0447CF92E8D32F9 /* Pods-CacheManager.release.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -460,6 +470,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = boostco.de.CacheManager;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -471,6 +482,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = boostco.de.CacheManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -482,6 +494,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = boostco.de.CacheManagerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
