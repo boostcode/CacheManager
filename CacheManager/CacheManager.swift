@@ -53,7 +53,7 @@ open class CacheManager<T> where T: Object {
         syncCacheItems()
     }
 
-    open func getRemoteItems(_ completion: (_ error: NSError?)->()) {}
+    open func getRemoteItems(_ completion: (_ error: NSError?)->Void) {}
 }
 
 extension CacheManager {
