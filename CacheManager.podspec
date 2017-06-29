@@ -4,7 +4,7 @@ Pod::Spec.new do |s|
    s.name = "CacheManager"
    s.summary = "CacheManager lets you cache objects locally using Realm, and then manage them."
    s.requires_arc = true
-   s.version = "0.0.5"
+   s.version = "0.1.0"
    s.license = { :type => "MIT", :file => "LICENSE" }
    s.author = { "Matteo Crippa" => "matteo@boostco.de" }
    s.homepage = "http://boostco.de"
