@@ -1,23 +1,30 @@
 PODS:
-  - Nimble (5.1.1)
-  - Quick (1.0.0)
-  - Realm (2.2.0):
-    - Realm/Headers (= 2.2.0)
-  - Realm/Headers (2.2.0)
-  - RealmSwift (2.2.0):
-    - Realm (= 2.2.0)
+  - Nimble (8.0.4)
+  - Quick (2.2.0)
+  - Realm (4.0.0):
+    - Realm/Headers (= 4.0.0)
+  - Realm/Headers (4.0.0)
+  - RealmSwift (4.0.0):
+    - Realm (= 4.0.0)
 
 DEPENDENCIES:
   - Nimble
   - Quick
   - RealmSwift
 
+SPEC REPOS:
+  trunk:
+    - Nimble
+    - Quick
+    - Realm
+    - RealmSwift
+
 SPEC CHECKSUMS:
-  Nimble: 415e3aa3267e7bc2c96b05fa814ddea7bb686a29
-  Quick: 8024e4a47e6cc03a9d5245ef0948264fc6d27cff
-  Realm: d95b8fb34c83f1e764b66d319277a62c2b6e4bf5
-  RealmSwift: a4fa52d06e946a32ec746b3388374f742e6b8731
+  Nimble: 18d5360282923225d62b09d781f63abc1a0111fc
+  Quick: 7fb19e13be07b5dfb3b90d4f9824c855a11af40e
+  Realm: 0c5b8f398daeec5b29824e41c453ff9e126e31d8
+  RealmSwift: 02e1f604f7091ec535145055764ca53efa8cdc92
 
-PODFILE CHECKSUM: 2c1ec49e1809196a42d333ffe8deb987c9bb321e
+PODFILE CHECKSUM: 38afe5a7db197e0e75b95318c7f5c5e0258ac8fa
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.8.4
